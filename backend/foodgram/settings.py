@@ -7,7 +7,7 @@ SECRET_KEY = 'o-$!859ls1i4*^)+-80!d0))2i7kfwg&g%&l=^opprtrt37uko'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['51.250.90.211']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -62,9 +62,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', default='psql'),
-        'USER': os.environ.get('POSTGRES_USER', default='psql'),
+        'USER': os.environ.get('POSTGRES_USER', default='postgres'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='12345678'),
-        'HOST': os.environ.get('DB_HOST', default=''),
+        'HOST': os.environ.get('DB_HOST', default='127.0.0.1'),
         'PORT': os.environ.get('DB_PORT', default=5432)
     }
 }
