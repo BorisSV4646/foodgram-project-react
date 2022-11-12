@@ -16,6 +16,9 @@ class Tag(models.Model):
         max_length=7,
         verbose_name='Цвет в HEX')
 
+    class Meta:
+        ordering = ['-name']
+
     def __str__(self):
         return self.name
 
@@ -23,12 +26,16 @@ class Tag(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(
         max_length=200,
-        verbose_name='Название'
+        verbose_name='Название',
+        db_index=True,
     )
     measurement_unit = models.CharField(
         max_length=200,
         verbose_name='В чем измеряется'
     )
+
+    class Meta:
+        ordering = ['-name']
 
     def __str__(self):
         return self.name
@@ -45,7 +52,7 @@ class Ingredient_amount(models.Model):
         on_delete=models.CASCADE,
         verbose_name='название рецепта',
     )
-    amount = models.PositiveIntegerField(
+    amount = models.PositiveSmallIntegerField(
         verbose_name='количество')
 
 
@@ -53,12 +60,13 @@ class Recipe(models.Model):
     name = models.CharField(
         max_length=200,
         verbose_name='Название',
+        db_index=True,
     )
     text = models.TextField(
         max_length=1000,
         verbose_name='Описание рецепта',
     )
-    cooking_time = models.PositiveIntegerField(
+    cooking_time = models.PositiveSmallIntegerField(
         verbose_name='Описание рецепта',
     )
     author = models.ForeignKey(

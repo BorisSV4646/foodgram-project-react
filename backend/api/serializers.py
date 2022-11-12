@@ -65,7 +65,7 @@ class IngredientSerializer(serializers.ModelSerializer):
         read_only_fields = '__all__'
 
 
-class Ingredient_amountSerializer(serializers.ModelSerializer):
+class IngredientAmountSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(source='ingredient.id')
     name = serializers.CharField(source='ingredient.name')
     measurement_unit = serializers.CharField(
@@ -77,7 +77,7 @@ class Ingredient_amountSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'measurement_unit', 'amount')
 
 
-class CreateIngredient_amountSerializer(serializers.ModelSerializer):
+class CreateIngredientAmountSerializer(serializers.ModelSerializer):
     id = serializers.PrimaryKeyRelatedField(queryset=Ingredient.objects.all())
     amount = serializers.IntegerField(write_only=True)
 
@@ -89,7 +89,7 @@ class CreateIngredient_amountSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=False, allow_null=True)
     tags = TagSerializer(many=True, read_only=True)
-    ingredients = Ingredient_amountSerializer(
+    ingredients = IngredientAmountSerializer(
         source='recipe_ingredient', many=True, read_only=True)
     author = CustomUserSerializer(many=False, read_only=True)
     is_favorited = serializers.SerializerMethodField()
@@ -118,7 +118,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 class CreateRecipeSerializer(serializers.ModelSerializer):
     author = CustomUserSerializer(many=False, read_only=True)
     image = Base64ImageField(required=False, allow_null=True)
-    ingredients = CreateIngredient_amountSerializer(many=True)
+    ingredients = CreateIngredientAmountSerializer(many=True)
 
     class Meta:
         model = Recipe
@@ -171,7 +171,7 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
         tags_data = validated_data.pop('tags')
         ingredients_data = validated_data.pop('ingredients')
         image = validated_data.pop('image')
-        recipe = Recipe.objects.create(image=image, **validated_data)
+        recipe = super().create(image=image, **validated_data)
         self.create_ingredients(ingredients_data, recipe)
         recipe.tags.set(tags_data)
         return recipe
