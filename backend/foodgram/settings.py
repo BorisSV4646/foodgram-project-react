@@ -7,7 +7,7 @@ SECRET_KEY = 'o-$!859ls1i4*^)+-80!d0))2i7kfwg&g%&l=^opprtrt37uko'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['51.250.90.211']
+ALLOWED_HOSTS = ['158.160.41.11', '127.0.0.1', '127.0.0.1:8000', '*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,16 +58,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodgram.wsgi.application'
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', default='psql'),
-        'USER': os.environ.get('POSTGRES_USER', default='postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='12345678'),
-        'HOST': os.environ.get('DB_HOST', default='127.0.0.1'),
-        'PORT': os.environ.get('DB_PORT', default=5432)
+        'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': os.getenv('DB_NAME', default='postgres'),
+        'USER': os.getenv('POSTGRES_USER', default='postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='12345678'),
+        'HOST': os.getenv('DB_HOST', default='db'),
+        'PORT': os.getenv('DB_PORT', default='5432')
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME', default='psql'),
+#         'USER': os.environ.get('POSTGRES_USER', default='postgres'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='12345678'),
+#         'HOST': os.environ.get('DB_HOST', default='127.0.0.1'),
+#         'PORT': os.environ.get('DB_PORT', default=5432)
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
