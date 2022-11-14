@@ -1,5 +1,5 @@
 # Foodgram
-![Foodgram Workflow](https://github.com/borissv4646/foodgram-project-react/actions/workflows/foodgram_workflow.yaml/badge.svg)
+![Foodgram Workflow](https://github.com/borissv4646/foodgram-project-react/workflows/foodgram_workflow.yaml/badge.svg)
 
 «Продуктовый помощник»: сайт, на котором пользователи будут публиковать рецепты, добавлять чужие рецепты в избранное и подписываться на публикации других авторов. Сервис «Список покупок» позволит пользователям создавать список продуктов, которые нужно купить для приготовления выбранных блюд.
 
@@ -114,3 +114,6 @@ docker-compose exec backend python manage.py collectstatic
 ## Документация к API
 Чтобы открыть документацию локально, запустите сервер и перейдите по ссылке:
 [http://127.0.0.1/api/docs/](http://127.0.0.1/api/docs/)
+
+## Проект оступен по адресу
+http://158.160.41.11/

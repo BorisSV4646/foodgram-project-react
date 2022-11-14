@@ -20,14 +20,10 @@ jobs:
         pip install -r backend/requirements.txt
     - name: Test with flake8 and django tests
       run: |
-        # запуск проверки проекта по flake8
-        # python -m flake8
-        #python -m pytest
-        # перейти в папку, содержащую manage.py — 
-        #<корневая_папка_infra_actions>/<папка_проекта>/manage.py
-        #cd backend/
-        # запустить написанные разработчиком тесты
-        #python manage.py test
+        python -m flake8
+        cd backend/
+        python manage.py test
+
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -46,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: vladtut/foodgram-backend:latest
+          tags: igorkalchenko/foodgram-backend:latest
           file: backend/Dockerfile
   deploy:
     runs-on: ubuntu-latest
