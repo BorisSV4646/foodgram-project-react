@@ -69,16 +69,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', default='5432')
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('DB_NAME', default='psql'),
-#         'USER': os.environ.get('POSTGRES_USER', default='postgres'),
-#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='12345678'),
-#         'HOST': os.environ.get('DB_HOST', default='127.0.0.1'),
-#         'PORT': os.environ.get('DB_PORT', default=5432)
-#     }
-# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

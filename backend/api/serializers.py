@@ -217,8 +217,12 @@ class FollowSerializer(serializers.ModelSerializer):
         return recipes.count()
 
     def get_recipes(self, obj):
-        queryset = Recipe.objects.filter(author=obj.author)
-        return ShortRecipeSerializer(queryset, many=True).data
+        recipes = obj.recipes.all()[:3]
+        request = self.context.get('request')
+        return ShortRecipeSerializer(
+            recipes, many=True,
+            context={'request': request}
+        ).data
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
